@@ -1,7 +1,9 @@
 # LinearAlgebra
 Linear algebra in C++ using BLAS and LAPACK libraries
 
-## BLAS functions
+## Available routines
+
+### BLAS
 
 - Level 1
   - [scal](test/scal.cpp) - Scale vector `x` by `a`, `x = a * x`
@@ -12,5 +14,10 @@ Linear algebra in C++ using BLAS and LAPACK libraries
   - [gemv](test/gemv.cpp) - Performs matrix multiplication of a matrix by a vector `y = alpha*A*x + beta*y`
   - [spmv](test/spmv.cpp) - Matrix vector mutiplication when `A` is a packed symmetric matrix, `y = alpha*A*x + beta*y`
 
-## LAPACK functions
+## LAPACK
 - [gesv](test/gesv.cpp) - LU decomposition to solve system of linear equations for x in `Ax=b` 
+
+## Building 
+
+The `OpenBLAS` library is made use of. `LAPACK` is included inside of 
+`OpenBLAS`, so a copy of `LAPACK` by itself is not necessary. 
