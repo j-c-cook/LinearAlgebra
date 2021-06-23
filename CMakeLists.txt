@@ -6,7 +6,6 @@ include_directories(include)
 # BLASPP include directories
 include_directories(third_party/blaspp)
 include_directories(third_party/blaspp/include)
-include_directories(third_party/blaspp/include/blas)
 
 # Create a DLL with an API
 add_library(LinearAlgebra SHARED
