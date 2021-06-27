@@ -5,7 +5,7 @@ include_directories(include)
 
 # Create a DLL with an API
 add_library(LinearAlgebra SHARED
-        src/blas.cpp src/lapack.cpp)
+        src/blas.cpp src/lapack.cpp src/dot.cpp)
 
 # Depends on LAPACK and BLAS
 find_package(LAPACK)
@@ -19,6 +19,15 @@ if (BLAS_FOUND)
 else()
     # ERROR
 endif()
+
+OPTION (USE_OpenMP "Use OpenMP" ON)
+IF(USE_OpenMP)
+    FIND_PACKAGE(OpenMP)
+    IF(OPENMP_FOUND)
+        SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${OpenMP_C_FLAGS}")
+        SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
+    ENDIF()
+ENDIF()
 
 # Create a test binary that depends on the DLL
 add_executable(test1 test/gesv.cpp)
