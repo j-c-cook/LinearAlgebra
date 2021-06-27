@@ -9,20 +9,29 @@ include_directories(third_party/blaspp/include)
 
 # Create a DLL with an API
 add_library(LinearAlgebra SHARED
-        src/blas.cpp src/lapack.cpp)
+        src/blas.cpp src/lapack.cpp src/dot.cpp)
 
 # Depends on LAPACK and BLAS
 find_package(LAPACK)
 target_link_libraries(LinearAlgebra ${LAPACK_LIBRARIES})
 
-# Open blas is specified because the default (Netlib BLAS) is much slower on my intel
 set(BLA_VENDOR OpenBLAS)
 find_package(BLAS)
+message(${BLAS_LIBRARIES})
 if (BLAS_FOUND)
     target_link_libraries(LinearAlgebra ${BLAS_LIBRARIES})
 else()
     # ERROR
 endif()
+
+OPTION (USE_OpenMP "Use OpenMP" ON)
+IF(USE_OpenMP)
+    FIND_PACKAGE(OpenMP)
+    IF(OPENMP_FOUND)
+        SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${OpenMP_C_FLAGS}")
+        SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
+    ENDIF()
+ENDIF()
 
 # Create a test binary that depends on the DLL
 add_executable(test1 test/gesv.cpp)
