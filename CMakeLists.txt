@@ -5,7 +5,8 @@ include_directories(include)
 
 # Create a DLL with an API
 add_library(LinearAlgebra SHARED
-        src/blas.cpp src/lapack.cpp src/dot.cpp src/axpy.cpp)
+        src/blas.cpp src/lapack.cpp src/dot.cpp src/axpy.cpp
+        src/spmv.cpp)
 
 # Depends on LAPACK and BLAS
 find_package(LAPACK)
