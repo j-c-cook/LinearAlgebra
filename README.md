@@ -1,4 +1,6 @@
 # LinearAlgebra
+https://github.com/j-c-cook/LinearAlgebra
+
 Linear algebra in C++ using BLAS and LAPACK libraries
 
 ## BLAS functions
